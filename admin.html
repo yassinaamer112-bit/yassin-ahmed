@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        لوحة المدير | نظام الحضور والغياب
+    </title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         Header
+    ========================== -->
+
+    <header class="admin-header">
+
+<!-- ========================================
+     زر تسجيل الخروج
+========================================= -->
+
+<button
+    type="button"
+    id="adminLogoutBtn"
+>
+    تسجيل الخروج
+</button>
+
+        <div class="header-content">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <h1>
+                        نظام الحضور والغياب
+                    </h1>
+
+                    <p>
+                        لوحة المدير
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="index.html"
+                class="home-btn"
+            >
+                الصفحة الرئيسية
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+         Main
+    ========================== -->
+
+    <main class="admin-container">
+
+
+        <section class="page-title">
+
+            <h2>
+                سجل الغياب المرسل
+            </h2>
+
+            <p>
+                اختر سجل الغياب لعرض تفاصيل الطلاب.
+            </p>
+
+        </section>
+
+
+
+        <!-- =========================
+             Statistics
+        ========================== -->
+
+        <section class="statistics">
+
+            <div class="stat-card">
+
+                <span class="stat-label">
+                    إجمالي الطلاب
+                </span>
+
+                <strong id="totalStudents">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span class="stat-label">
+                    الحاضرون
+                </span>
+
+                <strong id="presentStudents">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span class="stat-label">
+                    الغائبون
+                </span>
+
+                <strong id="absentStudents">
+                    0
+                </strong>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             آخر غياب
+        ========================== -->
+
+        <section class="attendance-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        آخر غياب تم إرساله
+                    </h2>
+
+                    <p>
+                        أحدث سجل تم إرساله من المدرس.
+                    </p>
+
+                </div>
+
+
+                <div class="header-actions">
+
+                    <button
+                        type="button"
+                        id="clearViewBtn"
+                        class="clear-view-btn"
+                    >
+                        مسح العرض
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="refreshBtn"
+                        class="refresh-btn"
+                    >
+                        تحديث
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- معلومات آخر سجل -->
+
+            <div
+                id="attendanceInfo"
+                class="attendance-info"
+            >
+
+                <div class="empty-state">
+                    جاري تحميل البيانات...
+                </div>
+
+            </div>
+
+
+            <!-- الطلاب -->
+
+            <div
+                id="studentsContainer"
+                class="students-container"
+            >
+
+            </div>
+
+        </section>
+
+
+<section class="daily-report-section">
+    <div class="section-header">
+        <div>
+            <h2>التقرير اليومي</h2>
+            <p>عرض غياب فصل معين في يوم محدد.</p>
+        </div>
+    </div>
+
+    <div class="daily-controls">
+        <div class="control-group">
+            <label for="dailyDate">تاريخ التقرير</label>
+            <input type="date" id="dailyDate" required>
+        </div>
+
+        <div class="control-group">
+            <label for="dailyGradeSelect">الصف الدراسي</label>
+            <select id="dailyGradeSelect">
+                <option value="">اختر الصف</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label for="dailyClassSelect">الفصل</label>
+            <select id="dailyClassSelect">
+                <option value="">اختر الفصل</option>
+            </select>
+        </div>
+
+        <button type="button" id="dailyReportBtn" class="refresh-btn">
+            عرض التقرير
+        </button>
+    </div>
+
+    <div id="dailyReportContainer">
+        <div class="empty-state">
+            اختر التاريخ والصف والفصل لعرض التقرير.
+        </div>
+    </div>
+</section>
+
+        <!-- =========================
+             كل سجلات الغياب
+        ========================== -->
+
+<!-- ==============================
+     التقرير الأسبوعي
+============================== -->
+
+<section class="weekly-report-section">
+
+    <div class="section-header">
+
+        <div>
+            <h2>التقرير الأسبوعي</h2>
+
+            <p>
+                اختر الأسبوع والصف والفصل لعرض غياب الطلاب.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="weekly-controls">
+
+        <div class="control-group">
+
+            <label for="weekStart">
+                بداية الأسبوع
+            </label>
+
+            <input
+                type="date"
+                id="weekStart"
+            >
+
+        </div>
+
+
+        <div class="control-group">
+
+            <label for="weekEnd">
+                نهاية الأسبوع
+            </label>
+
+            <input
+                type="date"
+                id="weekEnd"
+            >
+
+        </div>
+
+
+        <div class="control-group">
+
+            <label for="weeklyGradeSelect">
+                الصف
+            </label>
+
+            <select id="weeklyGradeSelect">
+
+                <option value="">
+                    اختر الصف
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="control-group">
+
+            <label for="weeklyClassSelect">
+                الفصل
+            </label>
+
+            <select id="weeklyClassSelect">
+
+                <option value="">
+                    اختر الفصل
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            type="button"
+            id="weeklyReportBtn"
+            class="refresh-btn"
+        >
+            عرض التقرير
+        </button>
+
+    </div>
+
+
+    <div id="weeklyReportContainer">
+
+        <div class="empty-state">
+
+            اختر البيانات ثم اضغط «عرض التقرير».
+
+        </div>
+
+    </div>
+
+</section>
+
+        <section class="history-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        سجلات الغياب
+                    </h2>
+
+                    <p>
+                        كل غياب تم إرساله من المدرسين.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!--
+                هنا تظهر كروت الغياب.
+                كل غياب = كارت مستقل.
+            -->
+
+            <div
+                id="historyContainer"
+                class="history-container"
+            >
+
+                <div class="empty-state">
+                    جاري تحميل السجلات...
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         Footer
+    ========================== -->
+
+    <footer class="admin-footer">
+
+        نظام الحضور والغياب المدرسي
+
+    </footer>
+
+
+
+    <script src="data.js"></script>
+
+    <script src="admin.js"></script>
+
+
+</body>
+
+</html>

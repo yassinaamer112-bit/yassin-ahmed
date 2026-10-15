@@ -1,0 +1,684 @@
+/* =====================================================
+   الصفحة الرئيسية - نظام الحضور والغياب
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #f1eee9;
+    --surface: #fffaf5;
+    --surface-2: #f8f2eb;
+
+    --text: #292522;
+    --muted: #817970;
+
+    --orange: #e87524;
+    --orange-dark: #c95d12;
+    --orange-light: #fff0e3;
+
+    --purple: #6651a8;
+    --purple-light: #eee9ff;
+
+    --green: #2f9b68;
+
+    --border: #e5ddd4;
+
+    --shadow:
+        0 18px 45px rgba(70, 52, 35, 0.10);
+}
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    direction: rtl;
+
+    font-family: "Cairo", sans-serif;
+
+    min-height: 100vh;
+
+    color: var(--text);
+
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(232, 117, 36, 0.17),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(102, 81, 168, 0.15),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(47, 155, 104, 0.08),
+            transparent 28%
+        ),
+        var(--bg);
+
+    animation: pageEnter 0.8s ease both;
+}
+
+a {
+    font-family: inherit;
+}
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes iconFloat {
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-7px) rotate(2deg);
+    }
+}
+
+@keyframes glowOrange {
+    0%,
+    100% {
+        opacity: 0.35;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.65;
+        transform: scale(1.15);
+    }
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        box-shadow:
+            0 10px 30px rgba(232, 117, 36, 0.20);
+    }
+
+    50% {
+        box-shadow:
+            0 15px 40px rgba(232, 117, 36, 0.34);
+    }
+}
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.home-page {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 35px 18px;
+
+    position: relative;
+}
+
+/* دو دوائر ديكور في الخلفية */
+
+.home-page::before {
+    content: "";
+
+    position: fixed;
+
+    width: 300px;
+    height: 300px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(232, 117, 36, 0.08);
+
+    top: -120px;
+    right: -100px;
+
+    pointer-events: none;
+
+    animation:
+        glowOrange 6s ease-in-out infinite;
+}
+
+.home-page::after {
+    content: "";
+
+    position: fixed;
+
+    width: 250px;
+    height: 250px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(102, 81, 168, 0.08);
+
+    bottom: -100px;
+    left: -80px;
+
+    pointer-events: none;
+
+    animation:
+        glowOrange 7s ease-in-out infinite reverse;
+}
+
+/* =====================================================
+   MAIN BOX
+===================================================== */
+
+.home-box {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(720px, 100%);
+
+    padding: 45px 40px;
+
+    text-align: center;
+
+    background:
+        rgba(255, 250, 245, 0.91);
+
+    border: 1px solid var(--border);
+
+    border-radius: 28px;
+
+    box-shadow: var(--shadow);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    animation:
+        pageEnter 0.8s ease both;
+}
+
+/* خط ديكوري أعلى الكارت */
+
+.home-box::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    right: 15%;
+
+    width: 70%;
+
+    height: 4px;
+
+    border-radius: 0 0 10px 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--orange),
+            var(--purple)
+        );
+}
+
+/* =====================================================
+   ICON
+===================================================== */
+
+.home-icon {
+    width: 76px;
+    height: 76px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 22px;
+
+    color: white;
+
+    font-size: 34px;
+
+    font-weight: 800;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--orange),
+            #f49a4f
+        );
+
+    box-shadow:
+        0 12px 30px rgba(232, 117, 36, 0.25);
+
+    animation:
+        iconFloat 4s ease-in-out infinite,
+        pulse 3s ease-in-out infinite;
+}
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.home-box h1 {
+    font-size: clamp(25px, 5vw, 34px);
+
+    font-weight: 800;
+
+    line-height: 1.4;
+
+    margin-bottom: 8px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--orange-dark),
+            var(--purple)
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+
+    animation:
+        pageEnter 0.8s 0.15s ease both;
+}
+
+.home-box > p {
+    color: var(--muted);
+
+    font-size: 15px;
+
+    margin-bottom: 30px;
+
+    animation:
+        pageEnter 0.8s 0.25s ease both;
+}
+
+/* =====================================================
+   LOGIN OPTIONS
+===================================================== */
+
+.login-options {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 17px;
+
+    text-align: right;
+}
+
+/* =====================================================
+   LOGIN CARD
+===================================================== */
+
+.login-card {
+    position: relative;
+
+    overflow: hidden;
+
+    min-height: 135px;
+
+    padding: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    text-decoration: none;
+
+    border-radius: 18px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    color: var(--text);
+
+    box-shadow:
+        0 8px 25px rgba(70, 52, 35, 0.06);
+
+    animation:
+        cardAppear 0.7s ease both;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.manager-card {
+    animation-delay: 0.15s;
+}
+
+.teacher-card {
+    animation-delay: 0.28s;
+}
+
+/* خط جانبي */
+
+.login-card::before {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    top: 0;
+
+    width: 5px;
+    height: 100%;
+
+    transition: width 0.3s ease;
+}
+
+.manager-card::before {
+    background:
+        linear-gradient(
+            180deg,
+            var(--orange),
+            #f4a05d
+        );
+}
+
+.teacher-card::before {
+    background:
+        linear-gradient(
+            180deg,
+            var(--purple),
+            #8a75d1
+        );
+}
+
+/* دائرة خلفية */
+
+.login-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 110px;
+    height: 110px;
+
+    border-radius: 50%;
+
+    left: -55px;
+    bottom: -60px;
+
+    transition:
+        transform 0.4s ease,
+        opacity 0.4s ease;
+
+    opacity: 0.6;
+}
+
+.manager-card::after {
+    background: var(--orange-light);
+}
+
+.teacher-card::after {
+    background: var(--purple-light);
+}
+
+.login-card:hover {
+    transform:
+        translateY(-8px)
+        scale(1.015);
+
+    box-shadow:
+        0 18px 38px rgba(70, 52, 35, 0.13);
+
+    border-color: #d8c3b0;
+}
+
+.login-card:hover::before {
+    width: 8px;
+}
+
+.login-card:hover::after {
+    transform: scale(2);
+    opacity: 0.9;
+}
+
+/* =====================================================
+   LOGIN ICON
+===================================================== */
+
+.login-card-icon {
+    position: relative;
+
+    z-index: 2;
+
+    flex-shrink: 0;
+
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 17px;
+
+    font-size: 27px;
+
+    transition:
+        transform 0.3s ease;
+}
+
+.manager-card .login-card-icon {
+    background: var(--orange-light);
+
+    box-shadow:
+        inset 0 0 0 1px rgba(232, 117, 36, 0.08);
+}
+
+.teacher-card .login-card-icon {
+    background: var(--purple-light);
+
+    box-shadow:
+        inset 0 0 0 1px rgba(102, 81, 168, 0.08);
+}
+
+.login-card:hover .login-card-icon {
+    transform:
+        rotate(-6deg)
+        scale(1.1);
+}
+
+/* =====================================================
+   LOGIN TEXT
+===================================================== */
+
+.login-card > div:last-child {
+    position: relative;
+
+    z-index: 2;
+}
+
+.login-card h2 {
+    font-size: 17px;
+
+    font-weight: 800;
+
+    margin-bottom: 5px;
+}
+
+.login-card span {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.8;
+}
+
+/* سهم */
+
+.login-card h2::after {
+    content: " ←";
+
+    opacity: 0;
+
+    margin-right: 4px;
+
+    transition:
+        opacity 0.25s ease,
+        margin-right 0.25s ease;
+}
+
+.login-card:hover h2::after {
+    opacity: 1;
+
+    margin-right: 8px;
+}
+
+.manager-card h2 {
+    color: var(--orange-dark);
+}
+
+.teacher-card h2 {
+    color: var(--purple);
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
+
+    .home-page {
+        padding: 20px 12px;
+    }
+
+    .home-box {
+        padding: 35px 18px;
+
+        border-radius: 22px;
+    }
+
+    .home-icon {
+        width: 68px;
+        height: 68px;
+
+        font-size: 29px;
+
+        border-radius: 19px;
+    }
+
+    .home-box h1 {
+        font-size: 25px;
+    }
+
+    .home-box > p {
+        font-size: 13px;
+
+        margin-bottom: 23px;
+    }
+
+    .login-options {
+        grid-template-columns: 1fr;
+
+        gap: 13px;
+    }
+
+    .login-card {
+        min-height: 115px;
+
+        padding: 18px;
+    }
+
+    .login-card-icon {
+        width: 53px;
+        height: 53px;
+
+        font-size: 24px;
+    }
+
+    .login-card h2 {
+        font-size: 16px;
+    }
+
+    .login-card span {
+        font-size: 11px;
+    }
+}
+
+/* =====================================================
+   SMALL PHONES
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .home-box {
+        padding: 30px 14px;
+    }
+
+    .home-box h1 {
+        font-size: 22px;
+    }
+
+    .login-card {
+        padding: 15px;
+    }
+}
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}

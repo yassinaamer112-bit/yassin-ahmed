@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>لوحة المدرس | نظام الحضور والغياب</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="teacher.css">
+</head>
+
+<body>
+
+  <header class="admin-header">
+<!-- ========================================
+     زر تسجيل خروج المدرس
+======================================== -->
+
+<button
+    type="button"
+    id="teacherLogoutBtn"
+>
+    تسجيل الخروج
+</button>
+
+    <div class="header-content">
+
+      <div class="brand">
+        <div class="brand-icon">✓</div>
+
+        <div>
+          <h1>نظام الحضور والغياب</h1>
+          <p>لوحة المدرس</p>
+        </div>
+      </div>
+
+      <a href="index.html" class="home-btn">
+        الصفحة الرئيسية
+      </a>
+
+    </div>
+  </header>
+
+
+  <main class="admin-container">
+
+    <section class="page-title">
+      <h2>تسجيل الحضور والغياب</h2>
+
+      <p>
+        اختر الصف والفصل والحصة ثم سجل حالة الطلاب.
+      </p>
+    </section>
+
+
+    <section class="control-panel">
+
+      <div class="control-group">
+        <label for="attendanceDate">
+          التاريخ
+        </label>
+
+        <input
+          type="date"
+          id="attendanceDate"
+        >
+      </div>
+
+
+      <div class="control-group">
+        <label for="gradeSelect">
+          الصف
+        </label>
+
+        <select id="gradeSelect">
+          <option value="">
+            اختر الصف
+          </option>
+        </select>
+      </div>
+
+
+      <div class="control-group">
+        <label for="classSelect">
+          الفصل
+        </label>
+
+        <select id="classSelect">
+          <option value="">
+            اختر الفصل
+          </option>
+        </select>
+      </div>
+
+
+      <div class="control-group">
+        <label for="periodSelect">
+          الحصة
+        </label>
+<select id="subjectSelect">
+    <option value="">اختر المادة</option>
+    <option value="عربي">عربي</option>
+    <option value="إنجليزي">إنجليزي</option>
+    <option value="رياضيات">رياضيات</option>
+    <option value="علوم">علوم</option>
+    <option value="تاريخ">تاريخ</option>
+    <option value="فلسفة">فلسفة</option>
+    <option value="فرنساوي">فرنساوي</option>
+    <option value="دين">دين</option>
+    <option value="برمجة">برمجة</option>
+    <option value="ألعاب">ألعاب</option>
+</select>
+        <select id="periodSelect">
+
+          <option value="">
+            اختر الحصة
+          </option>
+
+          <option value="1">
+            الحصة الأولى
+          </option>
+
+          <option value="2">
+            الحصة الثانية
+          </option>
+
+          <option value="3">
+            الحصة الثالثة
+          </option>
+
+          <option value="4">
+            الحصة الرابعة
+          </option>
+
+          <option value="5">
+            الحصة الخامسة
+          </option>
+
+          <option value="6">
+            الحصة السادسة
+          </option>
+
+          <option value="7">
+            الحصة السابعة
+          </option>
+
+        </select>
+      </div>
+
+    </section>
+
+
+    <section class="statistics">
+
+      <div class="stat-card">
+        <span class="stat-label">
+          إجمالي الطلاب
+        </span>
+
+        <strong id="totalStudents">
+          0
+        </strong>
+      </div>
+
+
+      <div class="stat-card">
+        <span class="stat-label">
+          الحاضرون
+        </span>
+
+        <strong id="presentStudents">
+          0
+        </strong>
+      </div>
+
+
+      <div class="stat-card">
+        <span class="stat-label">
+          الغائبون
+        </span>
+
+        <strong id="absentStudents">
+          0
+        </strong>
+      </div>
+
+    </section>
+
+
+    <section class="students-section">
+
+      <div class="section-header">
+
+        <div>
+          <h2>
+            قائمة الطلاب
+          </h2>
+
+          <p>
+            اختر البيانات لعرض الطلاب.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          id="refreshBtn"
+          class="refresh-btn"
+        >
+          تحديث
+        </button>
+
+      </div>
+
+
+      <div
+        id="studentsContainer"
+        class="students-container"
+      >
+
+        <div class="empty-state">
+          اختر الصف والفصل والحصة لعرض الطلاب.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="actions">
+
+      <button
+        type="button"
+        id="showStudentsBtn"
+        class="show-students-btn"
+      >
+        عرض الطلاب
+      </button>
+
+
+      <button
+        type="button"
+        id="saveAttendanceBtn"
+        class="save-btn"
+      >
+        إرسال الغياب
+      </button>
+
+    </section>
+
+  </main>
+
+
+  <footer class="admin-footer">
+    نظام الحضور والغياب المدرسي
+  </footer>
+
+
+  <script src="data.js"></script>
+  <script src="teacher.js"></script>
+
+</body>
+</html>

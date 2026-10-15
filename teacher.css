@@ -1,0 +1,1284 @@
+/* =====================================================
+   TEACHER DASHBOARD
+   التصميم النهائي
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #f1eee9;
+    --surface: #fffaf5;
+    --surface-2: #f8f3ed;
+
+    --text: #292522;
+    --muted: #817970;
+
+    --primary: #e87524;
+    --primary-dark: #c95d12;
+    --primary-soft: #fff0e3;
+
+    --purple: #6651a8;
+    --purple-soft: #eee9ff;
+
+    --green: #2f9b68;
+    --green-soft: #e7f7ef;
+
+    --red: #d85b5b;
+    --red-soft: #fff0f0;
+
+    --border: #e5ddd4;
+
+    --shadow:
+        0 10px 35px rgba(70, 52, 35, 0.08);
+
+    --shadow-hover:
+        0 16px 40px rgba(70, 52, 35, 0.13);
+
+    --radius: 18px;
+}
+
+
+/* =====================================================
+   الصفحة
+===================================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    direction: rtl;
+
+    font-family: "Cairo", sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(232, 117, 36, 0.10),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(102, 81, 168, 0.08),
+            transparent 25%
+        ),
+        var(--bg);
+
+    color: var(--text);
+
+    min-height: 100vh;
+
+    animation: pageFade 0.55s ease both;
+}
+
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   ANIMATION
+===================================================== */
+
+@keyframes pageFade {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes buttonPress {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.97);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* =====================================================
+   الهيدر
+===================================================== */
+
+.admin-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    background: rgba(255, 250, 245, 0.90);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border-bottom: 1px solid rgba(229, 221, 212, 0.8);
+
+    padding: 16px 25px;
+}
+
+.header-content {
+    width: min(1150px, 100%);
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.brand-icon {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            #f49a4f
+        );
+
+    color: #ffffff;
+
+    font-size: 22px;
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 20px rgba(232, 117, 36, 0.22);
+
+    transition: 0.25s ease;
+}
+
+.brand:hover .brand-icon {
+    transform: rotate(-5deg) scale(1.05);
+}
+
+.brand h1 {
+    font-size: 20px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.3px;
+}
+
+.brand p {
+    color: var(--muted);
+
+    font-size: 13px;
+
+    margin-top: 2px;
+}
+
+
+/* =====================================================
+   زر الصفحة الرئيسية
+===================================================== */
+
+.home-btn {
+    text-decoration: none;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+
+    padding: 0 18px;
+
+    border-radius: 11px;
+
+    background: var(--text);
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease;
+}
+
+.home-btn:hover {
+    transform: translateY(-2px);
+
+    background: #3b3632;
+
+    box-shadow:
+        0 8px 20px rgba(41, 37, 34, 0.15);
+}
+
+.home-btn:active {
+    animation: buttonPress 0.2s ease;
+}
+
+
+/* =====================================================
+   الحاوية
+===================================================== */
+
+.admin-container {
+    width: min(1150px, calc(100% - 30px));
+
+    margin: 34px auto 45px;
+}
+
+
+/* =====================================================
+   عنوان الصفحة
+===================================================== */
+
+.page-title {
+    margin-bottom: 24px;
+
+    animation: cardAppear 0.55s ease both;
+}
+
+.page-title h2 {
+    font-size: 28px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+
+    margin-bottom: 5px;
+}
+
+.page-title p {
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   لوحة اختيار البيانات
+===================================================== */
+
+.control-panel {
+    position: relative;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 250, 245, 0.98),
+            rgba(248, 243, 237, 0.98)
+        );
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    padding: 24px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 16px;
+
+    box-shadow: var(--shadow);
+
+    margin-bottom: 22px;
+
+    overflow: hidden;
+
+    animation: cardAppear 0.65s ease both;
+}
+
+.control-panel::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 120px;
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--primary),
+            var(--purple)
+        );
+
+    border-radius: 0 0 0 10px;
+}
+
+.control-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    min-width: 0;
+}
+
+.control-group label {
+    font-size: 13px;
+
+    font-weight: 800;
+
+    color: #4c4641;
+}
+
+
+/* =====================================================
+   الحقول
+===================================================== */
+
+.control-group input,
+.control-group select {
+    width: 100%;
+
+    height: 49px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 11px;
+
+    background: rgba(255, 255, 255, 0.75);
+
+    color: var(--text);
+
+    padding: 0 13px;
+
+    font-size: 13px;
+
+    outline: none;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.control-group input:hover,
+.control-group select:hover {
+    border-color: #d6c9bc;
+
+    background: #ffffff;
+}
+
+.control-group input:focus,
+.control-group select:focus {
+    border-color: var(--primary);
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 4px rgba(232, 117, 36, 0.11);
+
+    transform: translateY(-1px);
+}
+
+#attendanceDate {
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   الإحصائيات
+===================================================== */
+
+.statistics {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 16px;
+
+    margin-bottom: 22px;
+}
+
+.stat-card {
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffaf5,
+            #f8f1ea
+        );
+
+    border: 1px solid var(--border);
+
+    border-radius: 16px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    box-shadow: var(--shadow);
+
+    animation: cardAppear 0.7s ease both;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.stat-card:nth-child(2) {
+    background:
+        linear-gradient(
+            135deg,
+            #f5f1ff,
+            #eee9ff
+        );
+}
+
+.stat-card:nth-child(3) {
+    background:
+        linear-gradient(
+            135deg,
+            #fff4f1,
+            #ffebeb
+        );
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: var(--shadow-hover);
+}
+
+.stat-label {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    margin-bottom: 5px;
+}
+
+.stat-card strong {
+    display: block;
+
+    font-size: 31px;
+
+    font-weight: 800;
+}
+
+.stat-card:nth-child(2) strong {
+    color: var(--purple);
+}
+
+.stat-card:nth-child(3) strong {
+    color: var(--red);
+}
+
+
+/* =====================================================
+   قسم الطلاب
+===================================================== */
+
+.students-section {
+    background:
+        rgba(255, 250, 245, 0.92);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    padding: 24px;
+
+    box-shadow: var(--shadow);
+
+    margin-bottom: 22px;
+
+    animation: cardAppear 0.75s ease both;
+}
+
+.section-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    font-size: 20px;
+
+    font-weight: 800;
+
+    margin-bottom: 3px;
+}
+
+.section-header p {
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   زر تحديث
+===================================================== */
+
+.refresh-btn {
+    border: none;
+
+    min-height: 42px;
+
+    padding: 0 18px;
+
+    border-radius: 10px;
+
+    background: var(--purple);
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 16px rgba(102, 81, 168, 0.18);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.refresh-btn:hover {
+    background: #574294;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 22px rgba(102, 81, 168, 0.25);
+}
+
+.refresh-btn:active {
+    animation: buttonPress 0.2s ease;
+}
+
+
+/* =====================================================
+   قائمة الطلاب
+===================================================== */
+
+.students-container {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+    width: 100%;
+}
+
+.empty-state {
+    width: 100%;
+
+    padding: 32px 15px;
+
+    text-align: center;
+
+    color: var(--muted);
+
+    background:
+        rgba(248, 243, 237, 0.75);
+
+    border: 1px dashed #d8cec3;
+
+    border-radius: 13px;
+
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   بطاقة الطالب
+===================================================== */
+
+.student-card {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 13px 15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fffaf5,
+            #f9f4ee
+        );
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    animation: cardAppear 0.35s ease both;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.student-card:hover {
+    transform: translateX(-3px);
+
+    border-color: #dfc4ad;
+
+    box-shadow:
+        0 7px 20px rgba(70, 52, 35, 0.08);
+}
+
+.student-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 0;
+}
+
+.student-number {
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: var(--primary-soft);
+
+    color: var(--primary-dark);
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+.student-name {
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: var(--text);
+}
+
+.student-specialization {
+    color: var(--muted);
+
+    font-size: 11px;
+
+    margin-top: 2px;
+}
+
+
+/* =====================================================
+   حاضر / غائب
+   الجزء الأهم
+===================================================== */
+
+/*
+   الكود التالي ينسق radio buttons الموجودة
+   داخل .status-options بدون تغيير HTML.
+*/
+
+.status-options {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+.status-options label {
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 82px;
+
+    min-height: 36px;
+
+    padding: 0 13px;
+
+    border-radius: 9px;
+
+    background: #f2eee9;
+
+    border: 1px solid #ddd4cb;
+
+    color: #665f59;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.status-options label:hover {
+    transform: translateY(-1px);
+
+    border-color: #cfc3b8;
+}
+
+
+/* نخفي الراديو الأصلي */
+
+.status-options input {
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+/*
+   لما يكون الاختيار Present
+   المتصفح يطبق الشكل على label
+*/
+
+.status-options label:has(
+    input[value="present"]:checked
+) {
+    background: var(--green-soft);
+
+    border-color: #8bd0ad;
+
+    color: #23764f;
+
+    box-shadow:
+        0 5px 13px rgba(47, 155, 104, 0.12);
+}
+
+
+/*
+   لما يكون الاختيار Absent
+*/
+
+.status-options label:has(
+    input[value="absent"]:checked
+) {
+    background: var(--red-soft);
+
+    border-color: #e7a1a1;
+
+    color: #b84545;
+
+    box-shadow:
+        0 5px 13px rgba(216, 91, 91, 0.12);
+}
+
+
+/* =====================================================
+   لو الـHTML يستخدم أسماء عربية بدل القيم
+===================================================== */
+
+.status-options label:has(
+    input[value="حاضر"]:checked
+) {
+    background: var(--green-soft);
+
+    border-color: #8bd0ad;
+
+    color: #23764f;
+
+    box-shadow:
+        0 5px 13px rgba(47, 155, 104, 0.12);
+}
+
+.status-options label:has(
+    input[value="غائب"]:checked
+) {
+    background: var(--red-soft);
+
+    border-color: #e7a1a1;
+
+    color: #b84545;
+
+    box-shadow:
+        0 5px 13px rgba(216, 91, 91, 0.12);
+}
+
+
+/* =====================================================
+   الأزرار النهائية
+===================================================== */
+
+.actions {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 14px;
+
+    margin-top: 5px;
+
+    animation: cardAppear 0.8s ease both;
+}
+
+
+/* زر عرض الطلاب */
+
+.show-students-btn {
+    width: 100%;
+
+    min-height: 54px;
+
+    border: 1px solid #ddd4cb;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4a4541,
+            #2e2a27
+        );
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(41, 37, 34, 0.14);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+.show-students-btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 13px 27px rgba(41, 37, 34, 0.19);
+
+    filter: brightness(1.05);
+}
+
+.show-students-btn:active {
+    animation: buttonPress 0.2s ease;
+}
+
+
+/* زر إرسال الغياب */
+
+.save-btn {
+    width: 100%;
+
+    min-height: 54px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            #f18b3e
+        );
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 9px 22px rgba(232, 117, 36, 0.23);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+.save-btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 14px 28px rgba(232, 117, 36, 0.30);
+
+    filter: brightness(1.04);
+}
+
+.save-btn:active {
+    animation: buttonPress 0.2s ease;
+}
+
+
+/* =====================================================
+   الفوتر
+===================================================== */
+
+.admin-footer {
+    text-align: center;
+
+    padding: 25px 15px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   Responsive - Tablet
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .control-panel {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .control-group:first-child {
+        grid-column: span 2;
+    }
+}
+
+
+/* =====================================================
+   Responsive - Mobile
+===================================================== */
+
+@media (max-width: 650px) {
+
+    .admin-header {
+        padding: 14px 15px;
+    }
+
+    .header-content {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        text-align: center;
+    }
+
+    .brand {
+        justify-content: center;
+    }
+
+    .home-btn {
+        width: 100%;
+
+        text-align: center;
+    }
+
+
+    .admin-container {
+        width: calc(100% - 18px);
+
+        margin: 22px auto 35px;
+    }
+
+
+    .page-title {
+        margin-bottom: 18px;
+    }
+
+    .page-title h2 {
+        font-size: 22px;
+    }
+
+    .page-title p {
+        font-size: 13px;
+    }
+
+
+    /* لوحة الاختيارات */
+
+    .control-panel {
+        grid-template-columns: 1fr;
+
+        padding: 18px;
+
+        gap: 13px;
+
+        border-radius: 15px;
+    }
+
+    .control-group:first-child {
+        grid-column: auto;
+    }
+
+    .control-group input,
+    .control-group select {
+        height: 50px;
+    }
+
+
+    /* الإحصائيات */
+
+    .statistics {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 16px;
+    }
+
+    .stat-card strong {
+        font-size: 27px;
+    }
+
+
+    /* الطلاب */
+
+    .students-section {
+        padding: 18px;
+
+        border-radius: 15px;
+    }
+
+    .section-header {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .refresh-btn {
+        width: 100%;
+    }
+
+
+    /* الطلاب */
+
+    .student-card {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        padding: 13px;
+    }
+
+    .student-info {
+        width: 100%;
+    }
+
+    .status-options {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 8px;
+    }
+
+    .status-options label {
+        width: 100%;
+    }
+
+
+    /* الأزرار */
+
+    .actions {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+    .show-students-btn,
+    .save-btn {
+        min-height: 54px;
+    }
+}
+
+
+/* =====================================================
+   شاشات صغيرة جدًا
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .admin-container {
+        width: calc(100% - 12px);
+    }
+
+    .control-panel,
+    .students-section {
+        padding: 14px;
+    }
+
+    .brand h1 {
+        font-size: 17px;
+    }
+
+    .brand-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .page-title h2 {
+        font-size: 20px;
+    }
+
+    .student-name {
+        font-size: 13px;
+    }
+
+    .status-options label {
+        font-size: 11px;
+
+        min-height: 34px;
+    }
+}
+
+
+/* =====================================================
+   تقليل الحركة لمن يفضل واجهة هادئة
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ========================================
+   زر تسجيل خروج المدرس
+======================================== */
+
+#teacherLogoutBtn {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    background: #f28c28;
+    color: #ffffff;
+    font-family: "Cairo", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+#teacherLogoutBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(242, 140, 40, 0.25);
+}
+
+#teacherLogoutBtn:active {
+    transform: translateY(0);
+}

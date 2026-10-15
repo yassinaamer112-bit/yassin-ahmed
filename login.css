@@ -1,0 +1,222 @@
+/* ========================================
+   صفحة تسجيل الدخول
+======================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Cairo", sans-serif;
+    background: #f5f6f8;
+    color: #222;
+}
+
+
+/* ========================================
+   الصفحة
+======================================== */
+
+.login-page {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+
+/* ========================================
+   صندوق تسجيل الدخول
+======================================== */
+
+.login-box {
+    width: 100%;
+    max-width: 430px;
+
+    background: #ffffff;
+
+    padding: 40px 32px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.08);
+
+    text-align: center;
+}
+
+
+/* ========================================
+   الأيقونة
+======================================== */
+
+.login-icon {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f28c28;
+
+    border-radius: 50%;
+
+    font-size: 32px;
+}
+
+
+/* ========================================
+   العنوان
+======================================== */
+
+.login-box h1 {
+    font-size: 27px;
+    font-weight: 800;
+
+    margin-bottom: 10px;
+}
+
+.login-box p {
+    color: #777;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    margin-bottom: 28px;
+}
+
+
+/* ========================================
+   النموذج
+======================================== */
+
+.login-box form {
+    text-align: right;
+}
+
+.login-box label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.login-box input {
+    width: 100%;
+
+    padding: 14px 15px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 11px;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+}
+
+
+.login-box input:focus {
+    border-color: #f28c28;
+
+    box-shadow:
+        0 0 0 3px rgba(242, 140, 40, 0.12);
+}
+
+
+/* ========================================
+   زر الدخول
+======================================== */
+
+.login-box button {
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background: #f28c28;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.login-box button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(242, 140, 40, 0.25);
+}
+
+
+.login-box button:active {
+    transform: translateY(0);
+}
+
+
+/* ========================================
+   رسالة الخطأ أو النجاح
+======================================== */
+
+#adminLoginMessage,
+#teacherLoginMessage {
+    margin-top: 15px;
+
+    min-height: 24px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* ========================================
+   الموبايل
+======================================== */
+
+@media (max-width: 500px) {
+
+    .login-page {
+        padding: 15px;
+    }
+
+    .login-box {
+        padding: 32px 22px;
+    }
+
+    .login-box h1 {
+        font-size: 24px;
+    }
+
+}
